@@ -1,28 +1,40 @@
+import "../styles/Home.css";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
 import { useState } from "react";
 
 function validateSearch(e) {
   // Fonction de validation de l'entrée formulaire de l'utilisateur.
   // TODO: vérifier que l'entrée soit du texte acceptable pour envoyer à l'api.
-  if (e == "") return false;
+  if (e === "") return false;
   else return true;
 }
 
 function onSubmit(search, setData) {
   // Fonction lançant la recherche vers l'api https://api.tvmaze.com/search/shows?q={search}
   if (validateSearch(search)) {
-    console.log("Search button pressed", search);
-    // grab data from api
-    // store data in cache
-    setData([{show:{name:"Hello. This is me, the submit function."}}])
+    // grab data from api then store data in cache
+    fetch(`https://api.tvmaze.com/search/shows?q=${search}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        const data = [];
+        for (const item of res) {
+          data.push(item);
+        }
+        setData(data);
+      });
   }
 }
 
 function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
   return (
-    <div>
+    <div className="Home-search">
       <Input
         type="text"
         value={inputValue}
@@ -43,14 +55,26 @@ function SearchBar(props) {
 function DataList(props) {
   return (
     <div>
-      <div>Data belongs here. (TODO: movies list with mini icon and title)</div>
-      <h5>{props.data[0].show.name}</h5>
+      <ImageList className="Home-list" cols={5}>
+        {props.data.map((item) => (
+          <ImageListItem key={item.show.id}>
+            <img
+              src={item.show.image.medium}
+              alt={item.show.name}
+              loading="lazy"
+            />
+            <ImageListItemBar title={item.show.name} position="below" />
+          </ImageListItem>
+        ))}
+      </ImageList>
     </div>
   );
 }
 
 function Home() {
-  const [list, setList] = useState([{ show: { name: "Nothing to see yet" } }]);
+  const [list, setList] = useState([
+    { show: { id: 0, name: "Nothing to see yet", image: { medium: "" } } },
+  ]);
   return (
     <div>
       <h3>This is home.</h3>
