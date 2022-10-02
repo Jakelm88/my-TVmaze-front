@@ -4,7 +4,7 @@ import Input from "@mui/material/Input";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function validateSearch(e) {
   // Fonction de validation de l'entrée formulaire de l'utilisateur.
@@ -33,14 +33,17 @@ function onSubmit(search, setData) {
 
 function SearchBar(props) {
   const [inputValue, setInputValue] = useState("");
+  const submitBtn = useRef(null);
   return (
     <div className="Home-search">
       <Input
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={(e) => (e.key === "Enter" ? submitBtn.current.click() : null)}
       />
       <Button
+        ref={submitBtn}
         color="secondary"
         variant="contained"
         disableElevation
