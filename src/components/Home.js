@@ -59,7 +59,7 @@ function DataList(props) {
         {props.data.map((item) => (
           <ImageListItem key={item.show.id}>
             <img
-              src={item.show.image.medium}
+              src={item.show.image?.medium}
               alt={item.show.name}
               loading="lazy"
             />
@@ -72,9 +72,7 @@ function DataList(props) {
 }
 
 function Home() {
-  const [list, setList] = useState([
-    { show: { id: 0, name: "Nothing to see yet", image: { medium: "" } } },
-  ]);
+  const [list, setList] = useState([]);
   return (
     <div>
       <h3>This is home.</h3>
