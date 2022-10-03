@@ -2,7 +2,13 @@
 
 This app is a simple UI using the TVmaze API.
 On the home page, you can find a search bar. By clicking on search, you will be presented with 10 tv shows corresponding to your entry.
-Soon, clicking on a show image will bring you to a page presenting you with information about the show (network, summary, ...)
+Clicking on a show image will bring you to a page presenting you with information about the show (network, summary, ...).
+
+TODO :
+- 2nd page detail and css (logic is done)
+- use LocalStorage to store previous searches
+- show search history on home page
+- ? route history management ?
 
 _____________________
 
