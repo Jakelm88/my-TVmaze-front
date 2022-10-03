@@ -4,6 +4,8 @@ import Input from "@mui/material/Input";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
+import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router-dom";
 import { useRef, useState } from "react";
 
 function validateSearch(e) {
@@ -40,7 +42,9 @@ function SearchBar(props) {
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={(e) => (e.key === "Enter" ? submitBtn.current.click() : null)}
+        onKeyDown={(e) =>
+          e.key === "Enter" ? submitBtn.current.click() : null
+        }
       />
       <Button
         ref={submitBtn}
@@ -61,12 +65,14 @@ function DataList(props) {
       <ImageList className="Home-list" cols={5}>
         {props.data.map((item) => (
           <ImageListItem key={item.show.id}>
-            <img
-              src={item.show.image?.medium}
-              alt={item.show.name}
-              loading="lazy"
-            />
-            <ImageListItemBar title={item.show.name} position="below" />
+            <Link component={RouterLink} to={`/detail/${item.show.id}`}>
+              <img
+                src={item.show.image?.medium}
+                alt={item.show.name}
+                loading="lazy"
+              />
+              <ImageListItemBar title={item.show.name} position="below" />
+            </Link>
           </ImageListItem>
         ))}
       </ImageList>
