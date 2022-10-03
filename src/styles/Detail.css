@@ -1,0 +1,10 @@
+.Detail-data {
+    position: relative;
+    margin-bottom: 1vh;
+}
+
+.Detail-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

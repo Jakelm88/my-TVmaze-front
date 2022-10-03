@@ -1,6 +1,7 @@
+import "../styles/Detail.css";
 import { useEffect, useState } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
-import Link from "@mui/material/Link";
+import Button from "@mui/material/Button";
 
 function Detail() {
   let { id } = useParams();
@@ -18,12 +19,32 @@ function Detail() {
 
   if (data)
     return (
-      <div>
-        You asked for detail #{id}.
-        <Link component={RouterLink} to="/">Return</Link>
+      <div className="Detail-data">
+        <h3>{data.name}</h3>
+        <img
+          className="Detail-image"
+          src={data.image?.original}
+          alt={data.name}
+          loading="lazy"
+        />
+        <div className="Detail-summary">{data.summary}</div>
+        <Button
+          component={RouterLink}
+          to="/"
+          color="secondary"
+          variant="contained"
+          disableElevation
+        >
+          Return
+        </Button>
       </div>
     );
-  else return null;
+  else
+    return (
+      <div className="Detail-loading">
+        You asked for detail #{id}. Loading ...
+      </div>
+    );
 }
 
 export default Detail;
