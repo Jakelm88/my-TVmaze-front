@@ -1,10 +1,8 @@
 import "../styles/Home.css";
-import Button from "@mui/material/Button";
-import Input from "@mui/material/Input";
+import { Button, Input, Link } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import Link from "@mui/material/Link";
 import { Link as RouterLink } from "react-router-dom";
 import { useRef, useState } from "react";
 

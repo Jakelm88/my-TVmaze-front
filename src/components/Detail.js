@@ -1,7 +1,7 @@
 import "../styles/Detail.css";
 import { useEffect, useState } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
-import Button from "@mui/material/Button";
+import { Button, Grid } from "@mui/material";
 
 function Detail() {
   let { id } = useParams();
@@ -21,13 +21,19 @@ function Detail() {
     return (
       <div className="Detail-data">
         <h3>{data.name}</h3>
-        <img
-          className="Detail-image"
-          src={data.image?.original}
-          alt={data.name}
-          loading="lazy"
-        />
-        <div className="Detail-summary">{data.summary}</div>
+        <Grid container>
+          <Grid xs="auto">
+            <img
+              className="Detail-image"
+              src={data.image?.original}
+              alt={data.name}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid xs>
+            <div className="Detail-summary">{data.summary}</div>
+          </Grid>
+        </Grid>
         <Button
           component={RouterLink}
           to="/"
