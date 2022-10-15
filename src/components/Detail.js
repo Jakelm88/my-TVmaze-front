@@ -5,15 +5,27 @@ import { Button, Grid } from "@mui/material";
 
 function Detail() {
   let { id } = useParams();
+  /*
+    TODO : validation param id
+  */
   const [data, setData] = useState(null);
 
   useEffect(() => {
     fetch(`https://api.tvmaze.com/shows/${id}`)
-      .then((res) => {
-        return res.json();
-      })
+      .then(
+        (res) => {
+          return res.json();
+        },
+        (e) => {
+          return Promise.reject(e);
+        }
+      )
       .then((res) => {
         setData(res);
+      })
+      .catch((e) => {
+        console.error(e);
+        throw e;
       });
   }, [id]);
 
