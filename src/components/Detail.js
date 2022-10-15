@@ -34,7 +34,7 @@ function Detail() {
       <div className="Detail-data">
         <h3>{data.name}</h3>
         <Grid container>
-          <Grid xs="auto">
+          <Grid xs="auto" item>
             <img
               className="Detail-image"
               src={data.image?.original}
@@ -42,7 +42,7 @@ function Detail() {
               loading="lazy"
             />
           </Grid>
-          <Grid xs>
+          <Grid xs item>
             <div className="Detail-summary">{data.summary}</div>
           </Grid>
         </Grid>
